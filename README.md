@@ -8,7 +8,7 @@ A Todo List API é uma aplicação desenvolvida em ASP.NET Core para gerenciamen
 - .NET 8
 - MySQL
 - Visual Studio
-- Swagger ou Insomnia
+- Swagger
 
 ## Configuração do Ambiente
 
