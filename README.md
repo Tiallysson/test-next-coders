@@ -1,57 +1,65 @@
-# Desafio Técnico - Aplicação de Gerenciamento de Tarefas
+# Todo List API
 
-### Contexto do Desafio:
-Você foi contratado para desenvolver uma aplicação de gerenciamento de tarefas para uma empresa. O sistema deve permitir que os usuários criem, editem e excluam tarefas. Além disso, o sistema deve exibir uma lista de tarefas filtráveis por status (Concluída, Pendente).
+## Descrição
 
-### Requisitos:
+A Todo List API é uma aplicação desenvolvida em ASP.NET Core para gerenciamento de tarefas.
+## Requisitos
 
-#### 1. Backend (.NET)
-Desenvolver uma API RESTful usando ASP.NET Core que:
+- .NET 8
+- MySQL
+- Visual Studio
+- Swagger ou Insomnia
 
-- Permita criar, ler, atualizar e excluir (CRUD) tarefas.
-- Tenha rotas para filtrar as tarefas por status (Concluída, Pendente).
-- Valide as entradas (e.g., campos obrigatórios).
-- Utilize Entity Framework Core ou Dapper para se conectar a um banco de dados SQL.
+## Configuração do Ambiente
 
-**Modelo de Tarefa:**
+1. **Clone o Repositório**
 
-- **ID** (int, chave primária)
-- **Título** (string, obrigatório)
-- **Descrição** (string)
-- **Status** (enum: Pendente, Concluída)
-- **Data de Criação** (DateTime)
-- **Data de Conclusão** (DateTime?)
+   ```bash
+   git clone https://github.com/Tiallysson/test-next-coders.git
+   cd test-next-coders
 
-#### 2. Banco de Dados (SQL)
-- Criar um banco de dados SQL para armazenar as tarefas.
-- As tabelas podem ser criadas usando migrations do Entity Framework.
-- Deve conter alguns dados pré-populados (seed) para testes.
+2. **Configure o Banco de Dados MySQL**
 
-#### 3. Frontend (React) **(Opcional)**
-Criar uma aplicação simples em React que:
+    Crie um banco de dados MySQL e atualize a string de conexão no arquivo `appsettings.json`:
 
-- Liste as tarefas na tela inicial.
-- Tenha um formulário para criar uma nova tarefa.
-- Permita editar e excluir tarefas.
-- Permita filtrar as tarefas por status.
-- Use chamadas à API para realizar as operações de CRUD.
-  
-Utilize React Hooks e, se necessário, algum state management como Context API.
+    ```json
+    "ConnectionStrings": {
+      "DefaultConnection": "Server=localhost;Database=todo_list;User=root;Password=sua-senha;"
+    }
 
-#### 4. Extras (Diferenciais):
-- Front-end
-- Implementação de autenticação.
-- Autenticação.
-- Testes unitários para o backend.
-- Deploy da aplicação em um ambiente cloud (Azure, AWS, Heroku, etc.).
+## Execução da API
 
-### Entrega:
+1. **Execute a aplicação**
+   - Visual Studio Code
+   ```powershell
+   dotnet watch
+   ```
 
-- Faça um **fork** deste repositório e implemente sua solução.
-- Após finalizar, envie o link do repositório com sua solução.
-- Incluir um arquivo **README** com instruções de configuração e execução da aplicação.
+   - Visual Studio 2022
+   1. Pressione *f5* para executar a API
+   2. Pressione *Shift + F5* para parar a API
 
-### Critérios de Avaliação:
-- Organização do código e boas práticas.
-- Clareza e objetividade nas implementações.
-- Uso adequado do banco de dados.
+2. **Teste**
+   
+   ![Captura de tela 2024-08-25 091046](https://github.com/user-attachments/assets/194d3508-2444-44c2-a5dd-b44efa8014aa)
+
+    - Rota de criação de tarefas
+    ```python
+    POST: api/task/create
+    ```
+
+    - Rota de leitura de tarefas
+    ```python
+    GET: api/task/read
+    ```
+
+     - Rota de atualização de tarefas
+    ```python
+    PUT: api/task/update
+    ```
+
+     - Rota de deletar tarefas
+    ```python
+    DELETE: api/task/delete
+    ```
+   
