@@ -3,7 +3,7 @@
 ## Descrição
 
 A Todo List API é uma aplicação desenvolvida em ASP.NET Core para gerenciamento de tarefas.
-## Requisitos
+## Requisitos e ferramentas
 
 - .NET 8
 - MySQL
