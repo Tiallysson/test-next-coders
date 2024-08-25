@@ -12,6 +12,7 @@
         public required string Title { get; set; }
         public required string Description { get; set; }
         public TaskStatus Status { get; set; }
+        public DateTime CreatedAt { get; set; }
         public DateTime? CompletionDate { get; set; }
     }
 }

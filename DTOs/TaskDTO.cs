@@ -11,9 +11,18 @@ namespace test_next_coders.DTOs
     public class TaskDTO
     {
         [Required(ErrorMessage = "O campo titulo é obrigatório")]
-        public string Title { get; set; }
+        public required string Title { get; set; }
         [Required(ErrorMessage = "O campo descrição é obrigatório")]
-        public string Description { get; set; }
+        public required string Description { get; set; }
         public TaskStatusDTO taskStatus { get; set; }
+    }
+    public class ReadTaskDTO
+    {
+        [Required(ErrorMessage = "O campo titulo é obrigatório")]
+        public required string Title { get; set; }
+        [Required(ErrorMessage = "O campo descrição é obrigatório")]
+        public required string Description { get; set; }
+        public TaskStatusDTO taskStatus { get; set; }
+        public DateTime CreatedAt { get; set; }
     }
 }
