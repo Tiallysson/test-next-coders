@@ -51,14 +51,25 @@ namespace test_next_coders.Controllers
                 return BadRequest("Status inválido. O status deve ser 0 (Pendente), 1 (Em andamento), ou 2 (Concluída).");
             }
 
+            // Conversão de tipo / conversão explícita
+            // Conversão de enum para int: EmAndamento = 1
             var taskStatus = (TaskStatus)status;
 
             try
             {
                 var tasks = await _context.Tasks
                     .Where(t => t.Status == taskStatus)
+                    .Select(t => new ReadTaskDTO
+                    {
+                        Title = t.Title,
+                        Description = t.Description,
+                        taskStatus = (TaskStatusDTO)t.Status,
+                        CreatedAt = t.CreatedAt
+                    })
                     .ToListAsync();
 
+                // Usado quando a solicitação foi bem-sucedida, mas não há dados para retornar.
+                // Se não houver tarefas a serem retornadas, a API retorna um status 204 No Content
                 if (!tasks.Any())
                 {
                     return NoContent();
@@ -74,7 +85,7 @@ namespace test_next_coders.Controllers
 
         // PUT: api/task/update
         [HttpPut("update")]
-        public async Task<IActionResult> UpdateTaskAsync(int id, [FromBody] TaskDTO taskDTO)
+        public async Task<IActionResult> UpdateTaskByIdAsync(int id, [FromBody] TaskDTO taskDTO)
         {
             var task = await _context.Tasks.FindAsync(id);
 
@@ -87,6 +98,7 @@ namespace test_next_coders.Controllers
             task.Description = taskDTO.Description;
             task.Status = (TaskStatus)taskDTO.taskStatus;
 
+            // Define a completion date se o Status for Concluida = 2
             if (task.Status == TaskStatus.Concluida)
             {
                 task.CompletionDate = DateTime.Now;
