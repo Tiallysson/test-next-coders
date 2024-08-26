@@ -34,6 +34,8 @@ namespace test_next_coders.Controllers
                 Title = taskDTO.Title,
                 Description = taskDTO.Description,
                 Status = (Models.TaskStatus)taskDTO.taskStatus,
+                CreatedAt = DateTime.Now,
+                UserId = taskDTO.UserId
             };
 
             _context.Tasks.Add(newTask);
@@ -44,7 +46,7 @@ namespace test_next_coders.Controllers
 
         // GET: api/task/read
         [HttpGet("read")]
-        public async Task<IActionResult> ReadByStatusAsync(int status)
+        public async Task<IActionResult> ReadByStatusAsync(long status)
         {
             if (status < 0 || status > 2)
             {
@@ -52,7 +54,7 @@ namespace test_next_coders.Controllers
             }
 
             // Conversão de tipo / conversão explícita
-            // Conversão de enum para int: EmAndamento = 1
+            // Conversão de enum para long: EmAndamento = 1
             var taskStatus = (TaskStatus)status;
 
             try
@@ -61,6 +63,7 @@ namespace test_next_coders.Controllers
                     .Where(t => t.Status == taskStatus)
                     .Select(t => new ReadTaskDTO
                     {
+                        Id = t.Id,
                         Title = t.Title,
                         Description = t.Description,
                         taskStatus = (TaskStatusDTO)t.Status,
@@ -85,7 +88,7 @@ namespace test_next_coders.Controllers
 
         // PUT: api/task/update
         [HttpPut("update")]
-        public async Task<IActionResult> UpdateTaskByIdAsync(int id, [FromBody] TaskDTO taskDTO)
+        public async Task<IActionResult> UpdateTaskByIdAsync(long id, [FromBody] TaskDTO taskDTO)
         {
             var task = await _context.Tasks.FindAsync(id);
 
@@ -111,7 +114,7 @@ namespace test_next_coders.Controllers
 
         // DELETE: api/task/delete
         [HttpDelete("delete")]
-        public async Task<IActionResult> DeleteTaskByIdAsync(int id, TaskDTO taskDTO)
+        public async Task<IActionResult> DeleteTaskByIdAsync(long id, TaskDTO taskDTO)
         {
             var task = await _context.Tasks.FindAsync(id);
 
