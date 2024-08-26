@@ -50,7 +50,7 @@ namespace test_next_coders.Controllers
 
         // PUT: api/user
         [HttpPut]
-        public async Task<IActionResult> DataUpdateUserAsync(int id, [FromBody] UserAtualizationDTO userAtualizationDTO)
+        public async Task<IActionResult> DataUpdateUserAsync(long id, [FromBody] UserAtualizationDTO userAtualizationDTO)
         {
             if (userAtualizationDTO == null)
             {

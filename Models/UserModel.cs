@@ -8,15 +8,20 @@ namespace test_next_coders.Models
     {
         [Key]
         [Column("Id")]
-        public int Id { get; set; }
+        public long Id { get; set; }
+
         [Column("Name")]
         [MaxLength(32)]
         public required string Name { get; set; }
+
         [Column("Email")]
         [MaxLength(255)]
         public required string Email { get; set; }
+
         [Column("Password")]
         [MaxLength(255)]
         public required string Password { get; set; }
+
+        public ICollection<TaskModel> Tasks { get; set; }
     }
 }
